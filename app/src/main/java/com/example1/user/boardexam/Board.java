@@ -1,49 +1,46 @@
 package com.example1.user.boardexam;
 
-class Board {
+import java.io.Serializable;
+
+class Board implements Serializable { //저거 implements intent에서 값 넘길때 board 객체 넘기려고 추가한거임.
     String title;
     String date;
     String content;
     String filename;
-    //int type;
+    String downloadURL;
+    int type;
 
 
     Board(){}
-    Board(String title, String content, String filename){
+    /*Board(String title, String content, String filename, String downloadURL){
         this.title=title;
         this.content=content;
         this.filename=filename;
-    }
-
-    /*Board(String title, String content, String date, int layouttype){
-        this.title=title;
-        this.content=content;
-        this.date=date;
-        this.type=layouttype;
+        this.downloadURL = downloadURL;
     }*/
+
     public String getTitle(){return title;}
     public String getContent(){return content;}
     public String getDate(){return date;}
-    //public int getType(){return type;}
+    public int getType(){return type;}
     public String getFilename(){ return filename;}
+    public String getDownloadURL() { return downloadURL; }
+
 
     public void setFilename(String filename){
         this.filename = filename;
     }
-
+    public void setDownloadURL(String downloadURL) { this.downloadURL = downloadURL; }
     public void setTitle(String title) {
         this.title = title;
     }
-
-    /*public void setType(int type) {
+    public void setType(int type) {
         this.type = type;
-    }*/
-
+    }
     public void setContent(String content) {
 
         this.content = content;
     }
-
     public void setDate(String date) {
 
         this.date = date;

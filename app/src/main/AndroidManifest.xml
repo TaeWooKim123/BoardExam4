@@ -16,10 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RoomInfoActivity"></activity>
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register"></activity>
+        <activity
+            android:name=".Roominfo"
+            >
+        </activity>
     </application>
 
 </manifest>

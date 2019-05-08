@@ -5,12 +5,90 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:weightSum="2"
+        android:background="#6666FF"
+        android:layout_marginBottom="50dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            >
+            <ImageView
+
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/call"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:text="판매자 전화연결"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            >
+            <ImageView
+
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/chat"
+                android:layout_weight="1"
+
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:text="판매자 1:1채팅"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <ImageView
+        android:id="@+id/imageview"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/oneroom"
-        />
+        android:src="@mipmap/ic_launcher"
+        /> <!-- android:background="@drawable/oneroom" -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,25 +96,24 @@
         android:gravity="center"
 
         >
-        <TextView
-            android:paddingTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="월세 1000/55"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            />
 
         <TextView
+            android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="신축원룸 경기대앞 위치좋은 평기 풀옵션"
-            android:textSize="15sp"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:textSize="30sp"
+            android:textStyle="bold" />  <!-- android:text="월세 1000/55" -->
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="15dp"
-            />
+            android:textSize="15sp" />  <!-- android:text="신축원룸 경기대앞 위치좋은 평기 풀옵션" -->
 
         <View
             android:layout_width="match_parent"
@@ -45,26 +122,28 @@
             android:background="#70000000"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            />
+            /> <!-- 요것은 실선이다 -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="20dp"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="30dp"
+            android:paddingBottom="30dp"
             >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
                 android:orientation="vertical"
                 >
-
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/building"
                     />
                 <TextView
@@ -83,8 +162,8 @@
                 android:layout_marginRight="30dp"
                 >
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/extent"
                     />
                 <TextView
@@ -103,8 +182,8 @@
                 android:layout_marginRight="30dp"
                 >
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/building"
                     />
                 <TextView
@@ -123,8 +202,8 @@
                 android:layout_marginRight="30dp"
                 >
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/receipt"
                     />
                 <TextView
@@ -146,105 +225,4 @@
             android:layout_marginLeft="15dp"
             />
     </LinearLayout>
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:gravity="center"
-       android:paddingTop="10dp"
-       >
-       <Button
-        android:layout_width="60dp"
-        android:layout_height="20dp"
-        android:text="풀옵션"
-           android:textSize="5dp"
-        />
-
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="20dp"
-        android:text="빌트인"
-        android:textSize="5dp"
-        />
-   </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:weightSum="2"
-        android:background="#6666FF"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:weightSum="2"
-            >
-            <ImageView
-
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/call"
-                android:layout_weight="1"
-
-
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:text="판매자 전화연결"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:layout_weight="1"
-                />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:weightSum="2"
-                >
-                <ImageView
-
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/chat"
-                    android:layout_weight="1"
-
-
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="판매자 1:1채팅"
-                    android:textSize="15sp"
-                    android:gravity="center"
-                    android:paddingLeft="5dp"
-                    android:layout_weight="1"
-                    />
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
 </LinearLayout>

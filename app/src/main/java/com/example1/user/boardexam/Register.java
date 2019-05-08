@@ -16,8 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,15 +49,17 @@ public class Register extends Activity {
     Date now;
 
     private Uri filePath;
+    String downloadUrl;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
-
+    String photoLink;
+    Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        board = new Board();
         image_preview = (ImageView)findViewById(R.id.preview);            //미리보기
         button_choice = (ImageButton)findViewById(R.id.camera_connect);  //사진선택
         button_upload = (Button) findViewById(R.id.bt_upload);            //이거 클릭시 데이터 베이스에 업로드
@@ -85,7 +90,7 @@ public class Register extends Activity {
             public void onClick(View view) {
                 //업로드
                 uploadFile();       //사진 데이터베이스에 집어넣기
-                uploadText();   //텍스트 데이터베이스에 집어넣기
+                //uploadText();   //텍스트 데이터베이스에 집어넣기
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //다시 메인엑티비티로
                 startActivity(intent);
             }
@@ -94,8 +99,12 @@ public class Register extends Activity {
 
     public void uploadText(){                  //텍스트 부분을 따로 데이터베이스에 업로드하기 위해서 메소드 정의
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        Board board = new Board(title.getText().toString(), content.getText().toString(), filename);    //title하고 content를 받아와서 board클래스에 집어넣음.
-        //System.out.printf("김태우의 파일네임 : %s", board.filename);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        board.setDownloadURL(downloadUrl);
+        board.title = title.getText().toString();
+        board.content = content.getText().toString();
+        board.filename = filename;
+        //Board board = new Board(title.getText().toString(), content.getText().toString(), filename, downloadUrl.toString());    //title하고 content를 받아와서 board클래스에 집어넣음.
         database.child("message").push().setValue(board);
     }
 
@@ -119,6 +128,8 @@ public class Register extends Activity {
 
     //upload the file. 데이터베이스에 삽입 하는 부분임.
     private void uploadFile() {
+
+
         //업로드할 파일이 있으면 수행
         if (filePath != null) {
             //업로드 진행 Dialog 보이기
@@ -127,20 +138,35 @@ public class Register extends Activity {
             progressDialog.show();
 
             //storage
-            FirebaseStorage storage = FirebaseStorage.getInstance();
+            final FirebaseStorage storage = FirebaseStorage.getInstance();
 
             //Unique한 파일명을 만들자.
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMHH_mmss");
             now = new Date();
             filename = formatter.format(now) + ".png";
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://testfirebase-b3ec0.appspot.com").child("image/" + filename);
+            final StorageReference storageRef = storage.getReferenceFromUrl("gs://testfirebase-b3ec0.appspot.com").child("image/" + filename);
+
             //올라가거라...
-            storageRef.putFile(filePath)
+            storageRef.putFile(filePath)   //여기가 핵심...진짜 개고생했다...이게 병렬성 문제인가?? 따로 분리하면 안되는데 이렇게 합치면 된다...왜그런거지
                     //성공시
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                                    board.title = title.getText().toString();
+                                    board.content = content.getText().toString();
+                                    board.filename = filename;
+                                    downloadUrl = uri.toString();
+                                    board.setDownloadURL(downloadUrl);
+                                    System.out.printf("보드의 : %s", board.downloadURL);
+                                    database.child("message").push().setValue(board);
+                                    Log.d("uri", String.valueOf(downloadUrl));
+                                }
+                            });
                             progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
                             Toast.makeText(getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();
                         }

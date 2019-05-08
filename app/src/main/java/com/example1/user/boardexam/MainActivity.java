@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             }
             private void init(){  //리사이클러뷰 초기화 및 동작
                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
-
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                 recyclerView.setLayoutManager(linearLayoutManager);
 
