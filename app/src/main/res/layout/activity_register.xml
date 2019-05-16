@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:fillViewport="true">
-        <LinearLayout
-            android:id="@+id/layout7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingLeft="15dp"
-        >
+        android:orientation="vertical"
+        android:padding="3dp">
         <TextView
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -32,38 +17,29 @@
             android:textStyle="bold"
             android:textSize="25dp"
             />
-        <Button
-            android:id="@+id/bt_upload"
-            android:text="완료"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/preview"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"/> <!--사진 선택시 보이는 곳-->
-    <EditText
-        android:id="@+id/EditText_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="제목"
-        />
-    <EditText
-        android:id="@+id/EditText_content"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:hint="입력할 내용을 적어주세요"
-         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingLeft="15dp"
+        android:padding="3dp">
 
-        >
+        <Button android:id="@+id/btn_previous"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="PREVIOUS"
+            android:textSize="12sp"
+            android:onClick="mOnClick"/>
+
+        <Button android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next"
+            android:textSize="12sp"
+            android:onClick="mOnClick"/>
         <ImageButton
             android:id="@+id/camera_connect"
             android:layout_width="50dp"
@@ -71,8 +47,46 @@
             android:background="@drawable/camera"
             android:clickable="true"
             />
+        <Button
+            android:id="@+id/bt_upload"
+            android:text="완료"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+        </android.support.v4.view.ViewPager>
+        <!--<ImageView
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"/> -->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="3dp">
+        <EditText
+            android:id="@+id/EditText_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="제목"
+            />
+        <EditText
+            android:id="@+id/EditText_content"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="입력할 내용을 적어주세요"
+            />
     </LinearLayout>
 
-        </LinearLayout>
-    </FrameLayout>
-</ScrollView>
+</LinearLayout>
